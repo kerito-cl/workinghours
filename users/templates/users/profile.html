@@ -13,21 +13,19 @@
 
 
     </div>
-        <div class="col-md-4">
+        <div class="col-md-7">
           <div class="content-section">
             <h3>Total Hours </h3>
             <p class='text-muted'> Total amount of work time
-              {% for t in test %}
               <ul class="list-group">
-                <li class="list-group-item list-group-item-light">{{ user.profile.t.hours }}</li>
+                <li class="list-group-item list-group-item-light">Hours: {{ user.profile.hours }}</li>
 
-                <li class="list-group-item list-group-item-light">{{ user.profile.t.minutes }}</li>
-                <li class="list-group-item list-group-item-light">{{ user.profile.t.days_work }}</li>
+                <li class="list-group-item list-group-item-light">Minutes: {{ user.profile.minutes }}</li>
+                <li class="list-group-item list-group-item-light">Days Work: {{ user.profile.days_work }}</li>
               </ul>
             </p>
           </div>
         </div>
       </div>
 
-{% endfor %}
 {% endblock content %}
