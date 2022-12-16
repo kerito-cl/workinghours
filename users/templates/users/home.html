@@ -7,22 +7,27 @@
 <div class="content-section">
  <form method="POST">
             {% csrf_token %}
+
+ <fieldset class="form-group">
+     <legend class="border-bottom mb-4">Work Hours</legend>
                 {{ form|crispy }}
 
+    </fieldset>
 
-  <button type="button" id="call"> Start Work </button>
-
-
-  <label id="hour">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label>
-<div class="form-group">
-<button class="btn btn-outline-info" type="submit" id="halt"> Stop Work </button>
+    <div class="form-group">
+        <button class="btn btn-outline-info" type="submit"> Submit Hours </button>
 
   </div>
-<button type="button" id="pau"> Pause Work </button>
 
   </form>
   </div>
 
+  <button type="button" id="call"> Start Work </button>
+
+  <button type="button" id="pau"> Pause Work </button>
+
+  <button type="button" id="halt"> Stop Work </button>
+  <label id="hour">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label>
  </main>
 <script src="{% static 'hours/workhours.js' %}"></script>
 

@@ -8,8 +8,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 @login_required
 
 def home(request):
-
+    
     return render(request, 'users/home.html')
+
+
+
+
 
 class HoursCreateView(LoginRequiredMixin, CreateView):
     model = Profile
@@ -17,7 +21,7 @@ class HoursCreateView(LoginRequiredMixin, CreateView):
     template_name = 'users/home.html'
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        form.instance.author = self.request.user
         return super().form_valid(form)
 
 @login_required

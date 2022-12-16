@@ -4,5 +4,6 @@ from .views import HoursCreateView
 
 
 urlpatterns = [
-    path('', HoursCreateView.as_view(), name='users-home'),
+    path('', HoursCreateView.as_view(), name='users-home')
+
 ]
