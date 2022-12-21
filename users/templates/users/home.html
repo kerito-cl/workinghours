@@ -20,6 +20,24 @@
  </form>
     </div>
     </div>
+
+<div class="content-section">
+ <form method="POST">
+            {% csrf_token %}
+
+ <fieldset class="form-group">
+                {{ uform|crispy }}
+
+    </fieldset>
+
+    <div class="form-group">
+        <button class="btn btn-outline-info" type="submit"> Stop Work </button>
+        </fieldset>
+ </form>
+    </div>
+    </div>
+
+
   <button type="button" id="call"> Start Work </button>
 
   <button type="button" id="pau"> Pause Work </button>

@@ -32,4 +32,11 @@ class Hours(models.Model):
     def get_absolute_url(self):
       return reverse('users-home')
 
+class EndWork(models.Model):
+    worker = models.ForeignKey(User, on_delete=models.CASCADE)
+    finish_work = models.TimeField(default=timezone.now)
+
+class StartWork(models.Model):
+    worker = models.ForeignKey(User, on_delete=models.CASCADE)
+    start_work = models.TimeField(default=timezone.now)
 

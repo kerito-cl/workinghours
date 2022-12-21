@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.views.generic import ListView, CreateView, UpdateView
-from .models import Profile, Hours
+from .models import Profile, Hours, EndWork, StartWork
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import UserWorkForm
+from django.forms import ModelForm
 from django.contrib import messages
 
 @login_required
@@ -25,8 +25,8 @@ def home(request):
 
 
 class HoursCreateView(LoginRequiredMixin, CreateView):
-    model = Hours
-    fields = ['start', 'end']
+    model = StartWork
+    fields = ['start_work']
     
 
     template_name = 'users/home.html'
@@ -34,6 +34,19 @@ class HoursCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.worker = self.request.user
         return super().form_valid(form)
+
+
+class EndCreateView(LoginRequiredMixin, CreateView):
+
+    model = EndWork                                                                 
+    fields = ['end_work']                                                           
+    template_name = 'users/home.html'
+
+    def form_valid(self, uform):
+        uform.instance.worker = self.request.user
+        return super().form_valid(uform)
+
+                                                                                        
 
 #class HoursUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 #    model = Hours
