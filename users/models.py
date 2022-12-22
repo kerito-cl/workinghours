@@ -25,18 +25,19 @@ class Hours(models.Model):
 #        if self.end is not None and self.start is not None:
 #        return self.end - self.start
 
-    def __str__(self):
-        return self.date
+#    def __str__(self):
+
+#        return self.date
 
 
     def get_absolute_url(self):
       return reverse('users-home')
 
-class EndWork(models.Model):
-    worker = models.ForeignKey(User, on_delete=models.CASCADE)
-    finish_work = models.TimeField(default=timezone.now)
+#class EndWork(models.Model):
+#    worker = models.ForeignKey(User, on_delete=models.CASCADE)
+#    finish_work = models.TimeField(default=timezone.now)
 
-class StartWork(models.Model):
-    worker = models.ForeignKey(User, on_delete=models.CASCADE)
-    start_work = models.TimeField(default=timezone.now)
+#class StartWork(models.Model):
+#    worker = models.ForeignKey(User, on_delete=models.CASCADE)
+#    start_work = models.TimeField(default=timezone.now)
 

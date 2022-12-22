@@ -15,23 +15,9 @@
     </fieldset>
 
     <div class="form-group">
-        <button class="btn btn-outline-info" type="submit"> Start Work </button>
-        </fieldset>
- </form>
-    </div>
-    </div>
+        <button class="btn btn-outline-info" type="submit" name="empezar"> Start Work </button>
+         <button class="btn btn-outline-info" type="submit" name="parar"> Stop Work </button>
 
-<div class="content-section">
- <form method="POST">
-            {% csrf_token %}
-
- <fieldset class="form-group">
-                {{ uform|crispy }}
-
-    </fieldset>
-
-    <div class="form-group">
-        <button class="btn btn-outline-info" type="submit"> Stop Work </button>
         </fieldset>
  </form>
     </div>
