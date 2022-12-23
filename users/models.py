@@ -17,7 +17,7 @@ class Hours(models.Model):
     worker = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     start = models.TimeField(default=timezone.now)
-    end = models.TimeField(blank=True, null=True)
+    end = models.TimeField(default=timezone.now)
      
    
 #    @property

@@ -35,11 +35,14 @@ class HoursCreateView(LoginRequiredMixin, CreateView):
 #    date_default = datetime.strptime(datetime_str, '%H:%M:%S')
 
     def form_valid(self, form):
-        form.instance.worker = self.request.user
-        form.instance.end = self.datetime_str
-        return super().form_valid(form)
-    
+        if 'empezar' in self.request.POST:
 
+            form.instance.worker = self.request.user
+            form.instance.end = self.datetime_str
+            return super().form_valid(form)
+    
+        else:
+            return 
 #class EndCreateView(LoginRequiredMixin, CreateView):
 
 #    model = EndWork                                                                 
@@ -58,14 +61,17 @@ class HoursUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'users/home.html'
 
     def form_valid(self, form):
-        form.instance.worker = self.request.user
-        return super().form_valid(form)
+        if 'parar' in self.request.POST:
 
-    def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.worker:
-            return True
-        return False
+            form.instance.worker = self.request.user
+            form.instance.end = self.end
+            return super().form_valid(form)
+
+#    def test_func(self):
+#        post = self.get_object()
+#        if self.request.date == post.date:
+#            return True
+#        return False
 
 
 @login_required
