@@ -27,11 +27,10 @@ class Hours(models.Model):
 
 #    def __str__(self):
 
-#        return self.date
-
+#        return self.start.id
 
     def get_absolute_url(self):
-      return reverse('users-home')
+        return reverse('stop-work', kwargs={'pk':self.pk})
 
 #class EndWork(models.Model):
 #    worker = models.ForeignKey(User, on_delete=models.CASCADE)

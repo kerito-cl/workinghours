@@ -1,14 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.utils import timezone
-from django.views.generic import ListView, CreateView, UpdateView
+from django.utils import timezone, dateformat
+from django.views.generic import DetailView, CreateView, UpdateView
 from .models import Profile, Hours
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.forms import ModelForm
 from django.contrib import messages
-from datetime import datetime
-
-
+import datetime
+from django.urls import reverse
 
 @login_required
 
@@ -25,24 +24,24 @@ def home(request):
 
 
 
-
+class HoursDetailView(DetailView):
+    model = Hours
 
 class HoursCreateView(LoginRequiredMixin, CreateView):
     model = Hours
-    fields = ['start', 'end']
+    fields = ['start']
     datetime_str = "00:00:00"
     template_name = 'users/home.html'
 #    date_default = datetime.strptime(datetime_str, '%H:%M:%S')
 
     def form_valid(self, form):
-        if 'empezar' in self.request.POST:
 
-            form.instance.worker = self.request.user
-            form.instance.end = self.datetime_str
-            return super().form_valid(form)
+#        if 'empezar' in self.request.POST:
+
+        form.instance.worker = self.request.user
+        form.instance.end = self.datetime_str
+        return super().form_valid(form)
     
-        else:
-            return 
 #class EndCreateView(LoginRequiredMixin, CreateView):
 
 #    model = EndWork                                                                 
@@ -58,20 +57,25 @@ class HoursCreateView(LoginRequiredMixin, CreateView):
 class HoursUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Hours
     fields = ['end']
-    template_name = 'users/home.html'
-
+    template_name = 'users/hours_detail.html'
+    date_time = dateformat.format(timezone.now(), 'H:i:s')    
     def form_valid(self, form):
-        if 'parar' in self.request.POST:
+#        if 'parar' in self.request.POST:
+        form.instance.end = self.date_time
+        form.instance.worker = self.request.user
+#        form.instance.end = self.end
+        return super().form_valid(form)
 
-            form.instance.worker = self.request.user
-            form.instance.end = self.end
-            return super().form_valid(form)
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.worker:
+            return True
+        return False
+    def get_success_url(self):
 
-#    def test_func(self):
-#        post = self.get_object()
-#        if self.request.date == post.date:
-#            return True
-#        return False
+        return reverse('users-home')
+
+
 
 
 @login_required
