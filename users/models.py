@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-from django.utils import timezone
+from django.utils import timezone, dateformat
 from datetime import timedelta
 
 class Profile(models.Model):
@@ -19,15 +19,16 @@ class Hours(models.Model):
     start = models.TimeField(default=timezone.now)
     end = models.TimeField(default=timezone.now)
      
+    date_time = dateformat.format(timezone.now(), 'm-d-Y') 
    
 #    @property
 #    def duration(self):
 #        if self.end is not None and self.start is not None:
 #        return self.end - self.start
 
-#    def __str__(self):
+    def __str__(self):
 
-#        return self.start.id
+        return self.date_time
 
     def get_absolute_url(self):
         return reverse('stop-work', kwargs={'pk':self.pk})

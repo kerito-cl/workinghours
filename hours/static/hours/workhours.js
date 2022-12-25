@@ -9,7 +9,7 @@ document.getElementById("call").addEventListener("click",startTime)
 
 document.getElementById("halt").addEventListener("click",stopTime)
 document.getElementById("pau").addEventListener("click",pauseTime)
-
+document.getElementById("myBtn").disabled = true; 
 
 
 function startTime(){
